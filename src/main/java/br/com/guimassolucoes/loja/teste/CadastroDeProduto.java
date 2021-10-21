@@ -13,12 +13,21 @@ import br.com.guimassolucoes.loja.util.JPAUtil;
 public class CadastroDeProduto {
 
 	public static void main(String[] args) {
-		EntityManager em = JPAUtil.getEntityManager();
+		cadastrarProduto();
+		buscarProdutoPorId();
+	}
 
+	private static void buscarProdutoPorId() {
+		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+
+		Produto produto = produtoDao.buscarPorId(1L);
+		System.out.println(produto.getPreco());
+	}
+
+	private static void cadastrarProduto() {
 		Categoria categoria = new Categoria();
 		categoria.setNome("produtoes");
-
-		CategoriaDao categoriaDao = new CategoriaDao(em);
 
 		Produto produto = new Produto();
 		produto.setNome("Xiaomi Redmi");
@@ -26,7 +35,10 @@ public class CadastroDeProduto {
 		produto.setPreco(new BigDecimal("800"));
 		produto.setCategoria(categoria);
 
+		EntityManager em = JPAUtil.getEntityManager();
+
 		ProdutoDao produtoDao = new ProdutoDao(em);
+		CategoriaDao categoriaDao = new CategoriaDao(em);
 
 		em.getTransaction().begin();
 
