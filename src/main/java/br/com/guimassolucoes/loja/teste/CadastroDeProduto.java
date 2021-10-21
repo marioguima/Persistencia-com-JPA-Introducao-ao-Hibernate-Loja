@@ -18,6 +18,21 @@ public class CadastroDeProduto {
 		buscarProdutoPorId();
 		buscarTodosProdutos();
 		buscarProdutosPorNome();
+		buscarProdutosPorNomeDaCategoria();
+	}
+
+	private static void buscarProdutosPorNomeDaCategoria() {
+		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+
+		List<Produto> produtos = produtoDao.buscarProdutosPorNomeDaCategoria("Celulares");
+		produtos.forEach(p ->
+			System.out.printf(
+					String.format("Produto: %s - Valor: %s - Descrição: %s\n",
+							p.getId(),
+							p.getPreco(),
+							p.getDescricao()))
+		);
 	}
 
 	private static void buscarProdutosPorNome() {
@@ -58,7 +73,7 @@ public class CadastroDeProduto {
 
 	private static void cadastrarProduto() {
 		Categoria categoria = new Categoria();
-		categoria.setNome("produtoes");
+		categoria.setNome("Celulares");
 
 		Produto produto = new Produto();
 		produto.setNome("Xiaomi Redmi");

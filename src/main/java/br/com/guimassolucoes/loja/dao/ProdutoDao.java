@@ -31,4 +31,10 @@ public class ProdutoDao {
 				.setParameter("nome", nome)
 				.getResultList();
 	}
+	
+	public List<Produto> buscarProdutosPorNomeDaCategoria(String nomeCategoria) {
+		return em.createQuery("from Produto p where p.categoria.nome = :nomeCategoria", Produto.class)
+				.setParameter("nomeCategoria", nomeCategoria)
+				.getResultList();
+	}
 }
