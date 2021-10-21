@@ -19,6 +19,15 @@ public class CadastroDeProduto {
 		buscarTodosProdutos();
 		buscarProdutosPorNome();
 		buscarProdutosPorNomeDaCategoria();
+		buscarPrecoDoProdutoPorNome();
+	}
+
+	private static void buscarPrecoDoProdutoPorNome() {
+		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+
+		BigDecimal preco = produtoDao.buscarPrecoDoProdutoPorNome("Xiaomi Redmi");
+		System.out.printf(String.format("O preço do produto é %s\n", preco));
 	}
 
 	private static void buscarProdutosPorNomeDaCategoria() {
@@ -26,13 +35,11 @@ public class CadastroDeProduto {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 
 		List<Produto> produtos = produtoDao.buscarProdutosPorNomeDaCategoria("Celulares");
-		produtos.forEach(p ->
-			System.out.printf(
-					String.format("Produto: %s - Valor: %s - Descrição: %s\n",
-							p.getId(),
-							p.getPreco(),
-							p.getDescricao()))
-		);
+		produtos.forEach(p -> System.out.printf(
+				String.format("Produto: %s - Valor: %s - Descrição: %s\n",
+						p.getId(),
+						p.getPreco(),
+						p.getDescricao())));
 	}
 
 	private static void buscarProdutosPorNome() {
@@ -40,13 +47,11 @@ public class CadastroDeProduto {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 
 		List<Produto> produtos = produtoDao.buscarProdutosPorNome("Xiaomi Redmi");
-		produtos.forEach(p ->
-			System.out.printf(
-					String.format("Produto: %s - Valor: %s - Descrição: %s\n",
-							p.getId(),
-							p.getPreco(),
-							p.getDescricao()))
-		);
+		produtos.forEach(p -> System.out.printf(
+				String.format("Produto: %s - Valor: %s - Descrição: %s\n",
+						p.getId(),
+						p.getPreco(),
+						p.getDescricao())));
 	}
 
 	private static void buscarTodosProdutos() {
@@ -54,13 +59,11 @@ public class CadastroDeProduto {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 
 		List<Produto> produtos = produtoDao.buscarProdutos();
-		produtos.forEach(p ->
-			System.out.printf(
-					String.format("Produto: %s - Valor: %s - Descrição: %s\n",
-							p.getId(),
-							p.getPreco(),
-							p.getDescricao()))
-		);
+		produtos.forEach(p -> System.out.printf(
+				String.format("Produto: %s - Valor: %s - Descrição: %s\n",
+						p.getId(),
+						p.getPreco(),
+						p.getDescricao())));
 	}
 
 	private static void buscarProdutoPorId() {

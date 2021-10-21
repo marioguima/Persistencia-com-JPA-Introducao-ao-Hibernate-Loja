@@ -1,5 +1,6 @@
 package br.com.guimassolucoes.loja.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,5 +37,11 @@ public class ProdutoDao {
 		return em.createQuery("from Produto p where p.categoria.nome = :nomeCategoria", Produto.class)
 				.setParameter("nomeCategoria", nomeCategoria)
 				.getResultList();
+	}
+
+	public BigDecimal buscarPrecoDoProdutoPorNome(String nome) {
+		return em.createQuery("select p.preco from Produto p where p.nome = :nome", BigDecimal.class)
+				.setParameter("nome", nome)
+				.getSingleResult();
 	}
 }
