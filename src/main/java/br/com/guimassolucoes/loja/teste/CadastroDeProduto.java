@@ -1,6 +1,7 @@
 package br.com.guimassolucoes.loja.teste;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -15,6 +16,21 @@ public class CadastroDeProduto {
 	public static void main(String[] args) {
 		cadastrarProduto();
 		buscarProdutoPorId();
+		buscarTodosProdutos();
+	}
+
+	private static void buscarTodosProdutos() {
+		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+
+		List<Produto> produtos = produtoDao.buscarProdutos();
+		produtos.forEach(p ->
+			System.out.printf(
+					String.format("Produto: %s - Valor: %s - Descrição: %s",
+							p.getId(),
+							p.getPreco(),
+							p.getDescricao()))
+		);
 	}
 
 	private static void buscarProdutoPorId() {

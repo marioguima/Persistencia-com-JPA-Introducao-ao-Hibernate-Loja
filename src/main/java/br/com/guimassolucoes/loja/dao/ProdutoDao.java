@@ -1,5 +1,7 @@
 package br.com.guimassolucoes.loja.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.guimassolucoes.loja.entity.Produto;
@@ -18,5 +20,9 @@ public class ProdutoDao {
 
 	public Produto buscarPorId(Long id) {
 		return em.find(Produto.class, id);
+	}
+
+	public List<Produto> buscarProdutos() {
+		return em.createQuery("from Produto", Produto.class).getResultList();
 	}
 }
