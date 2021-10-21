@@ -25,4 +25,10 @@ public class ProdutoDao {
 	public List<Produto> buscarProdutos() {
 		return em.createQuery("from Produto", Produto.class).getResultList();
 	}
+
+	public List<Produto> buscarProdutosPorNome(String nome) {
+		return em.createQuery("from Produto p where p.nome = :nome", Produto.class)
+				.setParameter("nome", nome)
+				.getResultList();
+	}
 }

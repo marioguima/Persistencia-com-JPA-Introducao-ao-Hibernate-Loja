@@ -17,6 +17,21 @@ public class CadastroDeProduto {
 		cadastrarProduto();
 		buscarProdutoPorId();
 		buscarTodosProdutos();
+		buscarProdutosPorNome();
+	}
+
+	private static void buscarProdutosPorNome() {
+		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+
+		List<Produto> produtos = produtoDao.buscarProdutosPorNome("Xiaomi Redmi");
+		produtos.forEach(p ->
+			System.out.printf(
+					String.format("Produto: %s - Valor: %s - Descrição: %s\n",
+							p.getId(),
+							p.getPreco(),
+							p.getDescricao()))
+		);
 	}
 
 	private static void buscarTodosProdutos() {
@@ -26,7 +41,7 @@ public class CadastroDeProduto {
 		List<Produto> produtos = produtoDao.buscarProdutos();
 		produtos.forEach(p ->
 			System.out.printf(
-					String.format("Produto: %s - Valor: %s - Descrição: %s",
+					String.format("Produto: %s - Valor: %s - Descrição: %s\n",
 							p.getId(),
 							p.getPreco(),
 							p.getDescricao()))
